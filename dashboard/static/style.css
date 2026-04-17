@@ -1,0 +1,313 @@
+/* ═══════════════════════════════════════════
+   SentinelX — Professional SOC Dashboard
+   ═══════════════════════════════════════════ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: #0d1117;
+    color: #e6edf3;
+    font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+    background-color: #010409 !important;
+    border-bottom: 2px solid #da3633;
+    padding: 14px 28px;
+}
+
+.navbar-brand {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #e6edf3 !important;
+}
+
+.status-badge {
+    background-color: #0d2818;
+    border: 1px solid #3fb950;
+    color: #3fb950;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ── STAT CARDS ── */
+.stat-card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: #58a6ff;
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    color: #8b949e;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-sublabel {
+    font-size: 0.72rem;
+    color: #6e7681;
+    font-style: italic;
+}
+
+/* ── CARDS ── */
+.card {
+    background-color: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #1c2128 !important;
+    border-bottom: 1px solid #30363d !important;
+    padding: 13px 18px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #e6edf3;
+    letter-spacing: 0.3px;
+}
+
+.card-header .subtitle {
+    font-size: 0.72rem;
+    color: #6e7681;
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+/* ── SEVERITY BADGES ── */
+.sev-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    min-width: 75px;
+    text-align: center;
+}
+
+.sev-critical {
+    background-color: #da3633;
+    color: #ffffff;
+}
+
+.sev-high {
+    background-color: #e3b341;
+    color: #000000;
+}
+
+.sev-medium {
+    background-color: #388bfd;
+    color: #ffffff;
+}
+
+.sev-low {
+    background-color: #238636;
+    color: #ffffff;
+}
+
+/* ── BLOCK BUTTON ── */
+.btn-block {
+    background-color: #da3633;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.btn-block:hover {
+    background-color: #b62324;
+}
+
+.btn-block:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ── TABLE ── */
+.table-dark {
+    --bs-table-bg: #161b22;
+    --bs-table-hover-bg: #1c2128;
+    --bs-table-border-color: #21262d;
+    color: #e6edf3;
+}
+
+.table th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #8b949e;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid #30363d !important;
+    background-color: #1c2128;
+}
+
+.table td {
+    padding: 11px 16px;
+    vertical-align: middle;
+    border-color: #21262d;
+    color: #e6edf3;
+}
+
+/* ── IP ADDRESS STYLE ── */
+.ip-addr {
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    color: #58a6ff;
+    font-weight: 600;
+}
+
+/* ── ATTACK TYPE BADGE ── */
+.attack-brute {
+    color: #e3b341;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.attack-scan {
+    color: #388bfd;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* ── DETAILS TEXT ── */
+.details-text {
+    color: #8b949e;
+    font-size: 0.82rem;
+    max-width: 320px;
+}
+
+/* ── TIMESTAMP ── */
+.ts-text {
+    color: #6e7681;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+/* ── ALERT ANIMATION ── */
+@keyframes flashRow {
+    0%   { background-color: rgba(56, 139, 253, 0.25); }
+    100% { background-color: transparent; }
+}
+
+.alert-new { animation: flashRow 2s ease-out; }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+    color: #6e7681;
+    padding: 32px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+/* ── LIST GROUP ── */
+.list-group-item {
+    background-color: #161b22 !important;
+    border-color: #21262d !important;
+    color: #e6edf3 !important;
+    padding: 13px 18px;
+}
+
+.list-group-item:hover {
+    background-color: #1c2128 !important;
+}
+
+/* ── PROGRESS BAR ── */
+.progress {
+    background-color: #21262d;
+}
+
+/* ── FOOTER BAR ── */
+.footer-bar {
+    font-size: 0.72rem;
+    color: #6e7681;
+    padding: 8px 18px;
+    border-top: 1px solid #21262d;
+    text-align: right;
+}
+
+/* ── SELECT ── */
+.form-select {
+    background-color: #1c2128 !important;
+    border-color: #30363d !important;
+    color: #e6edf3 !important;
+    font-size: 0.82rem;
+}
+
+/* ── USERNAME / PASSWORD ── */
+.cred-user {
+    color: #e3b341;
+    font-family: monospace;
+    font-size: 0.88rem;
+}
+
+.cred-pass {
+    color: #f85149;
+    font-family: monospace;
+    font-size: 0.88rem;
+}
+/* ── BLOCKED BUTTON ── */
+.btn-blocked {
+    background-color: #238636;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+
+/* ── UNBLOCK BUTTON ── */
+.btn-unblock {
+    background-color: transparent;
+    color: #388bfd;
+    border: 1px solid #388bfd;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-unblock:hover {
+    background-color: #388bfd;
+    color: white;
+}

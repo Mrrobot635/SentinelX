@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentinelX — Network Security Monitor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark d-flex justify-content-between">
+    <span class="navbar-brand">SENTINELX</span>
+    <div class="d-flex align-items-center gap-3">
+        <span class="text-muted" style="font-size:0.78rem"
+              id="last-updated">Connecting...</span>
+        <span class="status-badge">MONITORING ACTIVE</span>
+    </div>
+</nav>
+
+<div class="container-fluid p-4">
+
+    <!-- STAT CARDS -->
+    <div class="row mb-4 g-3">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-label">Total Alerts</div>
+                <div class="stat-value text-white"
+                     id="total-alerts">0</div>
+                <div class="stat-sublabel">
+                    All detections this session
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-label">Critical / High</div>
+                <div class="stat-value"
+                     style="color:#da3633"
+                     id="critical-alerts">0</div>
+                <div class="stat-sublabel">
+                    Requires immediate attention
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-label">Brute Force SSH</div>
+                <div class="stat-value"
+                     style="color:#e3b341"
+                     id="brute-count">0</div>
+                <div class="stat-sublabel">
+                    Password attack attempts
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-label">Port Scans</div>
+                <div class="stat-value"
+                     style="color:#388bfd"
+                     id="scan-count">0</div>
+                <div class="stat-sublabel">
+                    Network reconnaissance
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="row mb-4 g-3">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Attacks per Hour — Last 24 Hours
+                    <span class="subtitle">
+                        Number of alerts generated per hour
+                    </span>
+                </div>
+                <div class="card-body">
+                    <canvas id="hourlyChart" height="95"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    Attack Type Breakdown
+                    <span class="subtitle">
+                        Distribution by category
+                    </span>
+                </div>
+                <div class="card-body d-flex flex-column
+                            justify-content-center align-items-center">
+                    <canvas id="typeChart"
+                            style="max-height:180px"></canvas>
+                    <div id="type-legend" class="mt-3 w-100"></div>
+                    <div id="type-empty" class="empty-state"
+                         style="display:none">
+                        No attack data recorded yet
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALERTS TABLE -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex
+                            justify-content-between align-items-center">
+                    <span>
+                        Live Security Alerts
+                        <span class="ms-2"
+                              style="background:#da3633;color:white;
+                                     padding:2px 8px;border-radius:10px;
+                                     font-size:0.75rem"
+                              id="alert-count-badge">0</span>
+                    </span>
+                    <div class="d-flex gap-2 align-items-center">
+                        <select id="severity-filter"
+                                class="form-select form-select-sm"
+                                style="width:auto"
+                                onchange="filterAlerts(this.value)">
+                            <option value="all">All Severities</option>
+                            <option value="Critical">Critical</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <button onclick="exportCSV()"
+                                class="btn btn-sm btn-outline-success">
+                            Export CSV
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-dark table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width:110px">Severity</th>
+                                <th>Source IP</th>
+                                <th>Attack Type</th>
+                                <th>Details</th>
+                                <th>Detected At</th>
+                                <th style="width:100px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alerts-table">
+                            <tr>
+                                <td colspan="6">
+                                    <div class="empty-state">
+                                        System is monitoring —
+                                        no alerts detected yet
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer-bar" id="table-footer">
+                    Auto-refreshing every 5 seconds
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="row g-3">
+
+        <!-- TOP IPs -->
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                    Top Attacker IPs
+                    <span class="subtitle">
+                        Ranked by number of alerts
+                    </span>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush"
+                        id="top-ips">
+                        <li class="list-group-item">
+                            <div class="empty-state">
+                                No attackers detected yet
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SSH ATTEMPTS -->
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    SSH Honeypot — Captured Credentials
+                    <span class="subtitle">
+                        All login attempts recorded by the honeypot
+                    </span>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-dark
+                                  table-hover table-sm mb-0">
+                        <thead>
+                            <tr>
+                                <th>Source IP</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Detected At</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ssh-table">
+                            <tr>
+                                <td colspan="4">
+                                    <div class="empty-state">
+                                        No SSH attempts recorded yet
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- VOICE ASSISTANT PANEL -->
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex
+                        justify-content-between
+                        align-items-center">
+                <span>
+                    Voice Assistant
+                    <span class="subtitle">
+                        Local speech engine — no external API
+                    </span>
+                </span>
+                <div class="d-flex align-items-center gap-3">
+                    <span id="voice-status-label"
+                          style="font-size:0.78rem;
+                                 color:#6e7681">
+                        Disabled
+                    </span>
+                    <div class="form-check form-switch mb-0">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="voice-toggle"
+                            onchange="toggleVoice(this.checked)"
+                            style="cursor:pointer;
+                                   width:40px;height:20px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body"
+                 id="voice-panel"
+                 style="display:none">
+                <div class="row g-3">
+
+                    <!-- Mic Button + Status -->
+                    <div class="col-md-4">
+                        <div style="background:#0d1117;
+                                    border:1px solid #30363d;
+                                    border-radius:8px;
+                                    padding:20px;
+                                    text-align:center">
+                            <div class="stat-label mb-3">
+                                Voice Input
+                            </div>
+
+                            <!-- Mic Button -->
+                            <button
+                                id="mic-btn"
+                                onclick="toggleMic()"
+                                style="width:70px;height:70px;
+                                       border-radius:50%;
+                                       background:#1c2128;
+                                       border:2px solid #30363d;
+                                       color:#8b949e;
+                                       font-size:1.8rem;
+                                       cursor:pointer;
+                                       transition:all 0.2s;
+                                       display:block;
+                                       margin:0 auto 12px auto">
+                                🎤
+                            </button>
+
+                            <div id="mic-status"
+                                 style="font-size:0.78rem;
+                                        color:#6e7681">
+                                Click to speak
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transcript + Response -->
+                    <div class="col-md-8">
+                        <div style="background:#0d1117;
+                                    border:1px solid #30363d;
+                                    border-radius:8px;
+                                    padding:16px;
+                                    height:100%">
+
+                            <!-- What you said -->
+                            <div class="stat-label mb-1">
+                                You said
+                            </div>
+                            <div id="voice-transcript"
+                                 style="background:#161b22;
+                                        border:1px solid #21262d;
+                                        border-radius:6px;
+                                        padding:10px;
+                                        min-height:36px;
+                                        font-size:0.88rem;
+                                        color:#e6edf3;
+                                        margin-bottom:12px;
+                                        font-style:italic">
+                                —
+                            </div>
+
+                            <!-- SentinelX response -->
+                            <div class="stat-label mb-1">
+                                SentinelX response
+                            </div>
+                            <div id="voice-response"
+                                 style="background:#161b22;
+                                        border:1px solid #21262d;
+                                        border-radius:6px;
+                                        padding:10px;
+                                        min-height:36px;
+                                        font-size:0.88rem;
+                                        color:#3fb950;
+                                        margin-bottom:12px">
+                                —
+                            </div>
+
+                            <!-- Type fallback -->
+                            <div class="stat-label mb-1">
+                                Or type a command
+                            </div>
+                            <div class="d-flex gap-2">
+                                <input
+                                    type="text"
+                                    id="voice-command-input"
+                                    placeholder="e.g. how many attacks today"
+                                    class="form-control"
+                                    style="background:#161b22;
+                                           border:1px solid #30363d;
+                                           color:#e6edf3;
+                                           font-size:0.85rem"
+                                    onkeypress="handleVoiceKey(event)">
+                                <button
+                                    onclick="sendVoiceCommand()"
+                                    style="background:#388bfd;
+                                           color:white;border:none;
+                                           padding:6px 16px;
+                                           border-radius:6px;
+                                           font-weight:600;
+                                           cursor:pointer;
+                                           white-space:nowrap">
+                                    Ask
+                                </button>
+                            </div>
+
+                            <!-- Available commands -->
+                            <div class="mt-2"
+                                 style="color:#6e7681;
+                                        font-size:0.72rem">
+                                Commands: "how many attacks today"
+                                — "system status"
+                                — "top attacker"
+                                — "critical alerts"
+                                — "brute force report"
+                                — "who is blocked"
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIN VOICE ASSISTANT PANEL -->
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+<script src="/static/dashboard.js"></script>
+</body>
+</html>
