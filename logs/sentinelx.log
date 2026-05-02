@@ -663,3 +663,72 @@
 2026-04-16 19:54:40,743 - INFO - 127.0.0.1 - - [16/Apr/2026 19:54:40] "GET /api/ssh_events HTTP/1.1" 200 -
 2026-04-16 19:55:40,444 - INFO - 127.0.0.1 - - [16/Apr/2026 19:55:40] "GET /api/ssh_events HTTP/1.1" 200 -
 2026-04-16 19:56:27,956 - INFO - 127.0.0.1 - - [16/Apr/2026 19:56:27] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:54:03,435 - INFO - SentinelX starting
+2026-05-01 22:54:05,494 - INFO - Honeypot started on port 2222
+2026-05-01 22:54:05,496 - INFO - Network sniffer started
+2026-05-01 22:54:06,956 - ERROR - Sniffer error: Error opening adapter: La syntaxe du nom de fichier, de répertoire ou de volume est incorrecte.  (123)
+2026-05-01 22:54:06,987 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.48:5000
+2026-05-01 22:54:06,987 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-01 22:54:42,524 - INFO - 127.0.0.1 - - [01/May/2026 22:54:42] "GET / HTTP/1.1" 200 -
+2026-05-01 22:54:43,043 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "[36mGET /static/dashboard.js HTTP/1.1[0m" 304 -
+2026-05-01 22:54:43,060 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-01 22:54:43,151 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "GET /socket.io/?EIO=4&transport=polling&t=Ptbm5_B HTTP/1.1" 200 -
+2026-05-01 22:54:43,463 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "POST /socket.io/?EIO=4&transport=polling&t=Ptbm5_I&sid=JsUSFGs5XQQzaFt3AAAA HTTP/1.1" 200 -
+2026-05-01 22:54:43,463 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "GET /socket.io/?EIO=4&transport=polling&t=Ptbm5_K&sid=JsUSFGs5XQQzaFt3AAAA HTTP/1.1" 200 -
+2026-05-01 22:54:43,503 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-01 22:54:43,712 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:54:43,805 - INFO - 127.0.0.1 - - [01/May/2026 22:54:43] "GET /socket.io/?EIO=4&transport=polling&t=Ptbm64i&sid=JsUSFGs5XQQzaFt3AAAA HTTP/1.1" 200 -
+2026-05-01 22:54:47,715 - INFO - 127.0.0.1 - - [01/May/2026 22:54:47] "POST /api/voice/enable HTTP/1.1" 200 -
+2026-05-01 22:54:48,398 - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\HP\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-05-01 22:54:48,398 - INFO - Using writeable comtypes cache directory: 'C:\Users\HP\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\comtypes\gen'
+2026-05-01 22:54:48,455 - INFO - 127.0.0.1 - - [01/May/2026 22:54:48] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:54:53,150 - INFO - 127.0.0.1 - - [01/May/2026 22:54:53] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:54:58,453 - INFO - 127.0.0.1 - - [01/May/2026 22:54:58] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:55:03,150 - INFO - 127.0.0.1 - - [01/May/2026 22:55:03] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:55:08,455 - INFO - 127.0.0.1 - - [01/May/2026 22:55:08] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:55:13,154 - INFO - 127.0.0.1 - - [01/May/2026 22:55:13] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:55:18,456 - INFO - 127.0.0.1 - - [01/May/2026 22:55:18] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:55:23,151 - INFO - 127.0.0.1 - - [01/May/2026 22:55:23] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:55:28,339 - INFO - 127.0.0.1 - - [01/May/2026 22:55:28] "GET /socket.io/?EIO=4&transport=websocket&sid=JsUSFGs5XQQzaFt3AAAA HTTP/1.1" 200 -
+2026-05-01 22:58:12,940 - INFO - SentinelX starting
+2026-05-01 22:58:13,112 - INFO - Honeypot started on port 2222
+2026-05-01 22:58:14,371 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.48:5000
+2026-05-01 22:58:14,372 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-01 22:58:14,961 - INFO - Network sniffer started
+2026-05-01 22:58:15,427 - ERROR - Sniffer error: Error opening adapter: La syntaxe du nom de fichier, de répertoire ou de volume est incorrecte.  (123)
+2026-05-01 22:58:26,155 - INFO - 127.0.0.1 - - [01/May/2026 22:58:26] "GET / HTTP/1.1" 200 -
+2026-05-01 22:58:26,381 - INFO - 127.0.0.1 - - [01/May/2026 22:58:26] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-01 22:58:26,393 - INFO - 127.0.0.1 - - [01/May/2026 22:58:26] "[36mGET /static/dashboard.js HTTP/1.1[0m" 304 -
+2026-05-01 22:58:26,753 - INFO - 127.0.0.1 - - [01/May/2026 22:58:26] "GET /socket.io/?EIO=4&transport=polling&t=PtbmyWE HTTP/1.1" 200 -
+2026-05-01 22:58:27,009 - INFO - 127.0.0.1 - - [01/May/2026 22:58:27] "POST /socket.io/?EIO=4&transport=polling&t=Ptbmyb4&sid=jhQU4GWgfXMJUwisAAAA HTTP/1.1" 200 -
+2026-05-01 22:58:27,061 - INFO - 127.0.0.1 - - [01/May/2026 22:58:27] "GET /socket.io/?EIO=4&transport=polling&t=Ptbmyb6&sid=jhQU4GWgfXMJUwisAAAA HTTP/1.1" 200 -
+2026-05-01 22:58:27,114 - INFO - 127.0.0.1 - - [01/May/2026 22:58:27] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:58:27,413 - INFO - 127.0.0.1 - - [01/May/2026 22:58:27] "GET /socket.io/?EIO=4&transport=polling&t=Ptbmygc&sid=jhQU4GWgfXMJUwisAAAA HTTP/1.1" 200 -
+2026-05-01 22:58:31,317 - INFO - 127.0.0.1 - - [01/May/2026 22:58:31] "POST /api/voice/enable HTTP/1.1" 200 -
+2026-05-01 22:58:31,424 - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\HP\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python312\\site-packages\\comtypes\\gen\\__init__.py'>
+2026-05-01 22:58:31,424 - INFO - Using writeable comtypes cache directory: 'C:\Users\HP\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\comtypes\gen'
+2026-05-01 22:58:31,538 - INFO - 127.0.0.1 - - [01/May/2026 22:58:31] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:58:36,451 - INFO - 127.0.0.1 - - [01/May/2026 22:58:36] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:58:41,778 - INFO - 127.0.0.1 - - [01/May/2026 22:58:41] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:58:46,451 - INFO - 127.0.0.1 - - [01/May/2026 22:58:46] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:58:51,753 - INFO - 127.0.0.1 - - [01/May/2026 22:58:51] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:58:56,450 - INFO - 127.0.0.1 - - [01/May/2026 22:58:56] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:01,756 - INFO - 127.0.0.1 - - [01/May/2026 22:59:01] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:06,451 - INFO - 127.0.0.1 - - [01/May/2026 22:59:06] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:11,756 - INFO - 127.0.0.1 - - [01/May/2026 22:59:11] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:16,451 - INFO - 127.0.0.1 - - [01/May/2026 22:59:16] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:21,755 - INFO - 127.0.0.1 - - [01/May/2026 22:59:21] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:22,048 - INFO - 127.0.0.1 - - [01/May/2026 22:59:22] "POST /api/voice/command HTTP/1.1" 200 -
+2026-05-01 22:59:26,750 - INFO - 127.0.0.1 - - [01/May/2026 22:59:26] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:31,450 - INFO - 127.0.0.1 - - [01/May/2026 22:59:31] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:36,753 - INFO - 127.0.0.1 - - [01/May/2026 22:59:36] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:41,449 - INFO - 127.0.0.1 - - [01/May/2026 22:59:41] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:46,752 - INFO - 127.0.0.1 - - [01/May/2026 22:59:46] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:51,451 - INFO - 127.0.0.1 - - [01/May/2026 22:59:51] "GET /api/ssh_events HTTP/1.1" 200 -
+2026-05-01 22:59:57,214 - INFO - 127.0.0.1 - - [01/May/2026 22:59:57] "GET /api/ssh_events HTTP/1.1" 200 -

@@ -29,9 +29,8 @@ class TestDetectionEngine(unittest.TestCase):
         conn.close()
         self.engine = DetectionEngine(self.db)
 
-    # ─────────────────────────────────────────
     # TC06 — No alert below threshold
-    # ─────────────────────────────────────────
+    
     def test_TC06_no_alert_below_threshold(self):
         """
         TC06: Verify no alert generated below threshold
@@ -53,9 +52,8 @@ class TestDetectionEngine(unittest.TestCase):
         self.assertEqual(len(alerts), 0)
         print("TC06 PASS: No alert below threshold")
 
-    # ─────────────────────────────────────────
     # TC07 — Brute force alert at threshold
-    # ─────────────────────────────────────────
+    
     def test_TC07_brute_force_alert_at_threshold(self):
         """
         TC07: Verify alert generated at threshold
@@ -86,9 +84,8 @@ class TestDetectionEngine(unittest.TestCase):
                          '192.168.56.101')
         print("TC07 PASS: Brute force alert generated")
 
-    # ─────────────────────────────────────────
     # TC08 — Severity classification
-    # ─────────────────────────────────────────
+    
     def test_TC08_severity_classification(self):
         """
         TC08: Verify correct severity classification
@@ -108,9 +105,8 @@ class TestDetectionEngine(unittest.TestCase):
             self.engine._classify_brute_force(50), 'Critical')
         print("TC08 PASS: Severity classification correct")
 
-    # ─────────────────────────────────────────
     # TC09 — Port scan detection
-    # ─────────────────────────────────────────
+    
     def test_TC09_port_scan_detection(self):
         """
         TC09: Verify port scan alert generated
@@ -139,9 +135,8 @@ class TestDetectionEngine(unittest.TestCase):
         self.assertGreater(len(port_scan_alerts), 0)
         print("TC09 PASS: Port scan alert generated")
 
-    # ─────────────────────────────────────────
     # TC10 — Duplicate alert prevention
-    # ─────────────────────────────────────────
+  
     def test_TC10_duplicate_alert_prevention(self):
         """
         TC10: Verify duplicate alerts are suppressed
@@ -174,9 +169,8 @@ class TestDetectionEngine(unittest.TestCase):
         self.assertEqual(len(brute_alerts), 1)
         print("TC10 PASS: Duplicate alert prevention works")
 
-    # ─────────────────────────────────────────
     # TC11 — Port scan severity
-    # ─────────────────────────────────────────
+  
     def test_TC11_port_scan_severity(self):
         """
         TC11: Verify port scan severity classification

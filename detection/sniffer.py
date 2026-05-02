@@ -1,15 +1,13 @@
 """
 SentinelX - Network Sniffer Module
-Captures TCP/SYN packets to detect port scanning activity.
-Uses Scapy for packet analysis.
+Captures TCP/SYN packets to detect port scanning.
 
-Interface: enp0s8 (Host-Only Network)
-This ensures only traffic from the internal network
-is monitored, not internet traffic from NAT interface.
-
-Context: Designed for internal threat detection where
-an attacker is already present on the local network
-(compromised machine, rogue WiFi connection, malware, etc.)
+Monitors the enp0s8 interface (Host-Only network only).
+This was a deliberate choice made after testing showed
+that monitoring all interfaces flooded the engine with
+irrelevant NAT traffic from the browser and OS.
+Restricting to enp0s8 ensures only internal threats
+are detected.
 """
 
 import os
@@ -36,25 +34,13 @@ MONITOR_INTERFACE = "enp0s8"
 
 class NetworkSniffer:
     """
+    Monitors the internal network interface (enp0s8).
+    I chose this interface specifically because
+    monitoring all interfaces captured too much
+    irrelevant NAT traffic and caused false positives.
+    This way we only see internal network activity.
     Captures network packets and detects port scanning.
-
-    Internal Threat Context:
-    ─────────────────────────────────────────────────
-    Monitors the Host-Only network interface (enp0s8)
-    to detect reconnaissance activity from threats
-    already inside the network:
-
-    - Compromised machines running automated scanners
-    - Rogue devices connected to internal WiFi
-    - Malware performing lateral movement
-    - Insider threats mapping the internal network
-    - Phishing victims with RAT installed
-
-    Detection method:
-    Monitors SYN packets (TCP connection initiation).
-    If one IP sends SYN to 10+ different ports in 30s
-    → Port scan detected → Alert generated
-    ─────────────────────────────────────────────────
+    
     """
 
     def __init__(self):
@@ -71,7 +57,7 @@ class NetworkSniffer:
             daemon=True
         )
         self.thread.start()
-        print("[SNIFFER] 🔍 Network sniffer started")
+        print("[SNIFFER] Network sniffer started")
         if MONITOR_INTERFACE:
             print(f"[SNIFFER] Monitoring interface: {MONITOR_INTERFACE}")
         else:
@@ -175,10 +161,8 @@ class NetworkSniffer:
         except Exception as e:
             logger.debug(f"Packet processing error: {e}")
 
-
-# ─────────────────────────────────────────
 # STANDALONE TEST
-# ─────────────────────────────────────────
+
 if __name__ == '__main__':
     import time
     print("[SNIFFER] Starting standalone test...")

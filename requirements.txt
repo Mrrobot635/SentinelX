@@ -1,6 +1,24 @@
+# SentinelX - Python Dependencies
+# Install with: pip install -r requirements.txt
+# On Ubuntu, also run: sudo apt install -y espeak portaudio19-dev
+
+# SSH Honeypot
 paramiko==3.4.0
+
+# Network packet capture
 scapy==2.5.0
-flask==3.0.0
+
+# Web dashboard
+flask==3.0.3
 flask-socketio==5.3.6
-flask-sqlalchemy==3.1.1
-eventlet==0.35.1
+eventlet==0.36.1
+
+# Voice assistant - text to speech
+pyttsx3==2.99
+
+# Voice assistant - speech recognition
+SpeechRecognition==3.10.4
+PyAudio==0.2.14
+
+# Testing
+pytest==8.3.4

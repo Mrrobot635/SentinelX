@@ -302,10 +302,7 @@ function showBlockNotification(ipAddress, message) {
     setTimeout(() => div.remove(), 5000);
 }
 
-
-// ═══════════════════════════════════════════
 // VOICE ASSISTANT
-// ═══════════════════════════════════════════
 
 let recognition    = null;
 let isListening    = false;

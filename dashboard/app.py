@@ -8,7 +8,7 @@ import os
 import sys
 import subprocess
 import platform
-import threading          # ← AJOUTÉ
+import threading          
 from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -19,9 +19,9 @@ from database.manager import DatabaseManager
 import io
 import csv
 
-# ─────────────────────────────────────────
+
 # APP SETUP
-# ─────────────────────────────────────────
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'sentinelx-secret-key-2024'
 socketio = SocketIO(
@@ -29,17 +29,15 @@ socketio = SocketIO(
     cors_allowed_origins="*",
     logger=False,
     engineio_logger=False,
-    ping_timeout=120,      # ← Évite les déconnexions intempestives
-    ping_interval=60       # ← Garde la connexion active
+    ping_timeout=120,     
+    ping_interval=60      
 )
 db = DatabaseManager()
 
 # Global voice assistant instance
 voice_assistant = None
 
-# ─────────────────────────────────────────
 # ROUTES
-# ─────────────────────────────────────────
 
 @app.route('/')
 def index():
@@ -98,10 +96,7 @@ def export_csv():
         }
     )
 
-
-# ─────────────────────────────────────────
 # BLOCK IP ROUTES
-# ─────────────────────────────────────────
 
 @app.route('/api/block_ip', methods=['POST'])
 def block_ip():
@@ -179,12 +174,6 @@ def get_blocked_ips():
     return jsonify(db.get_blocked_ips())
 
 
-# ─────────────────────────────────────────
-# VOICE ASSISTANT
-# ─────────────────────────────────────────
-
-voice_assistant = None
-
 def get_voice_assistant():
     """Get or create voice assistant instance"""
     global voice_assistant
@@ -244,8 +233,6 @@ def voice_command():
     # Get or create assistant
     va = get_voice_assistant()
 
-    # Always process regardless of enabled state
-    # (typing a command = explicit user action)
     was_enabled = va.enabled
     va.enabled = True
     response = va.process_command(command)
@@ -264,10 +251,7 @@ def voice_status():
     enabled = voice_assistant is not None and voice_assistant.enabled
     return jsonify({'enabled': enabled})
 
-
-# ─────────────────────────────────────────
 # SOCKET.IO EVENTS
-# ─────────────────────────────────────────
 
 @socketio.on('connect')
 def handle_connect():
@@ -309,10 +293,7 @@ def emit_new_alert(alert_data):
             daemon=True
         ).start()
 
-
-# ─────────────────────────────────────────
 # FIREWALL HELPER FUNCTIONS
-# ─────────────────────────────────────────
 
 def execute_block(ip_address):
     """
@@ -371,10 +352,8 @@ def execute_unblock(ip_address):
         except Exception as e:
             print(f"[BLOCK] Unblock error: {e}")
 
-
-# ─────────────────────────────────────────
 # RUN
-# ─────────────────────────────────────────
+
 if __name__ == '__main__':
     print("[DASHBOARD] SentinelX Dashboard starting...")
     print("[DASHBOARD] Open http://localhost:5000 in your browser")

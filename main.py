@@ -1,12 +1,13 @@
 """
 SentinelX - Main Entry Point
-Launches all modules simultaneously:
-- SSH Honeypot (port 2222)
-- Network Sniffer (Scapy)
-- Web Dashboard (Flask + Socket.io)
 
-Developed for: Influence Mood Digital Agency
-Context: Internal network threat detection
+Starts all three modules simultaneously using Python threads.
+The dashboard runs in the main thread since Flask/Socket.io
+needs to own the main loop. The honeypot and sniffer run
+as background daemon threads.
+
+Note: a small delay is added before the sniffer starts
+to give the honeypot time to bind its port first.
 """
 
 import threading
@@ -15,9 +16,8 @@ import os
 import sys
 import logging
 
-# ─────────────────────────────────────────
 # LOGGING SETUP
-# ─────────────────────────────────────────
+
 logging.basicConfig(
     filename='logs/sentinelx.log',
     level=logging.INFO,

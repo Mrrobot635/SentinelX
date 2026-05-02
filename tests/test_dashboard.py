@@ -48,9 +48,8 @@ class TestDashboardAPI(unittest.TestCase):
             session_id='api-test-001'
         )
 
-    # ─────────────────────────────────────────
     # TC12 — Dashboard loads
-    # ─────────────────────────────────────────
+    
     def test_TC12_dashboard_loads(self):
         """
         TC12: Verify dashboard page loads correctly
@@ -60,9 +59,8 @@ class TestDashboardAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         print("TC12 PASS: Dashboard page loads correctly")
 
-    # ─────────────────────────────────────────
     # TC13 — Alerts API returns data
-    # ─────────────────────────────────────────
+    
     def test_TC13_alerts_api(self):
         """
         TC13: Verify /api/alerts returns correct data
@@ -77,9 +75,8 @@ class TestDashboardAPI(unittest.TestCase):
                          'BRUTE_FORCE')
         print("TC13 PASS: Alerts API returns correct data")
 
-    # ─────────────────────────────────────────
     # TC14 — Statistics API
-    # ─────────────────────────────────────────
+    
     def test_TC14_statistics_api(self):
         """
         TC14: Verify /api/statistics returns valid stats
@@ -95,9 +92,8 @@ class TestDashboardAPI(unittest.TestCase):
         self.assertGreater(data['total'], 0)
         print("TC14 PASS: Statistics API returns valid data")
 
-    # ─────────────────────────────────────────
     # TC15 — SSH events API
-    # ─────────────────────────────────────────
+    
     def test_TC15_ssh_events_api(self):
         """
         TC15: Verify /api/ssh_events returns events
@@ -112,9 +108,8 @@ class TestDashboardAPI(unittest.TestCase):
         self.assertIn('password', data[0])
         print("TC15 PASS: SSH events API returns credentials")
 
-    # ─────────────────────────────────────────
     # TC16 — Block IP API
-    # ─────────────────────────────────────────
+    
     def test_TC16_block_ip_api(self):
         """
         TC16: Verify /api/block_ip blocks correctly
@@ -138,9 +133,8 @@ class TestDashboardAPI(unittest.TestCase):
         self.assertIn('192.168.56.101', blocked_ips)
         print("TC16 PASS: Block IP API works correctly")
 
-    # ─────────────────────────────────────────
     # TC17 — Unblock IP API
-    # ─────────────────────────────────────────
+    
     def test_TC17_unblock_ip_api(self):
         """
         TC17: Verify /api/unblock_ip unblocks correctly
@@ -167,9 +161,8 @@ class TestDashboardAPI(unittest.TestCase):
         self.assertNotIn('192.168.56.200', blocked_ips)
         print("TC17 PASS: Unblock IP API works correctly")
 
-    # ─────────────────────────────────────────
     # TC18 — Filter alerts by severity
-    # ─────────────────────────────────────────
+   
     def test_TC18_filter_alerts_by_severity(self):
         """
         TC18: Verify alerts can be filtered by severity
@@ -182,9 +175,8 @@ class TestDashboardAPI(unittest.TestCase):
             self.assertEqual(alert['severity'], 'High')
         print("TC18 PASS: Alert filtering works correctly")
 
-    # ─────────────────────────────────────────
     # TC19 — Export CSV
-    # ─────────────────────────────────────────
+   
     def test_TC19_export_csv(self):
         """
         TC19: Verify CSV export works correctly

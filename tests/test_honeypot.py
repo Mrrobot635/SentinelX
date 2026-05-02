@@ -29,9 +29,8 @@ class TestHoneypot(unittest.TestCase):
         conn.commit()
         conn.close()
 
-    # ─────────────────────────────────────────
     # TC01 — Honeypot initialization
-    # ─────────────────────────────────────────
+    
     def test_TC01_honeypot_initialization(self):
         """
         TC01: Verify honeypot initializes correctly
@@ -45,9 +44,8 @@ class TestHoneypot(unittest.TestCase):
         self.assertIsNotNone(honeypot.host_key)
         print("TC01 PASS: Honeypot initialized correctly")
 
-    # ─────────────────────────────────────────
     # TC02 — SSH event logging
-    # ─────────────────────────────────────────
+
     def test_TC02_ssh_event_logging(self):
         """
         TC02: Verify SSH attempt is logged to database
@@ -69,9 +67,8 @@ class TestHoneypot(unittest.TestCase):
         self.assertEqual(events[0]['password'], 'password123')
         print("TC02 PASS: SSH event logged correctly")
 
-    # ─────────────────────────────────────────
     # TC03 — Credential capture
-    # ─────────────────────────────────────────
+    
     def test_TC03_credential_capture(self):
         """
         TC03: Verify multiple credentials are captured
@@ -101,9 +98,8 @@ class TestHoneypot(unittest.TestCase):
         self.assertIn('root', usernames)
         print("TC03 PASS: All credentials captured correctly")
 
-    # ─────────────────────────────────────────
     # TC04 — Timestamp recording
-    # ─────────────────────────────────────────
+    
     def test_TC04_timestamp_recording(self):
         """
         TC04: Verify timestamp is recorded with each event
@@ -122,9 +118,8 @@ class TestHoneypot(unittest.TestCase):
         self.assertNotEqual(events[0]['timestamp'], '')
         print("TC04 PASS: Timestamp recorded correctly")
 
-    # ─────────────────────────────────────────
     # TC05 — Duplicate session handling
-    # ─────────────────────────────────────────
+   
     def test_TC05_duplicate_session(self):
         """
         TC05: Verify duplicate session IDs are handled

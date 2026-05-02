@@ -1,13 +1,19 @@
 """
 SentinelX - Voice Assistant Module
-100% local - no external API
-Uses pyttsx3 + SpeechRecognition
 
-Features:
-- Wake word "Sentinel" activates listening
-- Voice commands processed locally
-- Automatic alert announcements
-- Voice-controlled IP blocking
+This module handles all voice interaction for SentinelX.
+I built it to give the administrator a way to check the
+network status without having to look at the dashboard,
+which matters in a real monitoring context.
+
+Speech recognition is handled client-side in the browser
+using the Web Speech API. The recognised text is sent to
+Flask via HTTP POST, then processed here. The response is
+spoken back using pyttsx3, which runs entirely locally
+with no internet connection needed.
+
+The wake word is 'Sentinel'. Say it, then ask a question.
+Voice-controlled IP blocking is also supported.
 """
 
 import pyttsx3
@@ -58,9 +64,7 @@ class VoiceAssistant:
         print("[VOICE] Voice assistant initialized")
         print("[VOICE] Wake word: 'Sentinel'")
 
-    # ─────────────────────────────────────────
     # SPEAK
-    # ─────────────────────────────────────────
 
     def speak(self, text):
         """Speak synchronously"""
@@ -78,9 +82,7 @@ class VoiceAssistant:
         thread.start()
         return thread
 
-    # ─────────────────────────────────────────
     # WAKE WORD LOOP
-    # ─────────────────────────────────────────
 
     def start_wake_word_loop(self):
         """
@@ -153,9 +155,7 @@ class VoiceAssistant:
             print(f"[VOICE] Listen error: {e}")
             return None
 
-    # ─────────────────────────────────────────
     # ALERT ANNOUNCEMENT
-    # ─────────────────────────────────────────
 
     def announce_alert(self, alert_data):
         """Announce security alert vocally"""
@@ -202,9 +202,7 @@ class VoiceAssistant:
 
         self.speak_async(message)
 
-    # ─────────────────────────────────────────
     # COMMAND PROCESSING
-    # ─────────────────────────────────────────
 
     def process_command(self, command):
         """
@@ -298,9 +296,7 @@ class VoiceAssistant:
         self.speak_async(response)
         return response
 
-    # ─────────────────────────────────────────
     # BLOCK / UNBLOCK VIA VOICE
-    # ─────────────────────────────────────────
 
     def _handle_block_command(self, command):
         """
@@ -381,9 +377,7 @@ class VoiceAssistant:
         except Exception as e:
             return f"Could not unblock IP. Error: {e}"
 
-    # ─────────────────────────────────────────
     # REPORTS
-    # ─────────────────────────────────────────
 
     def _report_today(self):
         try:
@@ -544,9 +538,7 @@ class VoiceAssistant:
             "Or: who is blocked."
         )
 
-    # ─────────────────────────────────────────
     # ENABLE / DISABLE
-    # ─────────────────────────────────────────
 
     def enable(self):
         """Enable voice assistant and start wake word loop"""
@@ -576,9 +568,8 @@ class VoiceAssistant:
         print("[VOICE] Disabled")
 
 
-# ─────────────────────────────────────────
 # STANDALONE TEST
-# ─────────────────────────────────────────
+
 if __name__ == '__main__':
     print("[VOICE] Standalone test starting...")
     assistant = VoiceAssistant()

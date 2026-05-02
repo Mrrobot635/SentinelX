@@ -17,9 +17,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from database.manager import DatabaseManager
 
-# ─────────────────────────────────────────
 # LOGGING SETUP
-# ─────────────────────────────────────────
+
 logging.basicConfig(
     filename='logs/sentinelx.log',
     level=logging.INFO,
@@ -27,10 +26,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger('SentinelX.Honeypot')
 
-# ─────────────────────────────────────────
 # SSH SERVER KEY
 # Generate once and reuse
-# ─────────────────────────────────────────
+
 HOST_KEY_PATH = 'honeypot/server.key'
 
 def get_host_key():
@@ -43,9 +41,8 @@ def get_host_key():
         print("[HONEYPOT] New RSA host key generated")
         return key
 
-# ─────────────────────────────────────────
 # FAKE SSH SERVER INTERFACE
-# ─────────────────────────────────────────
+
 class FakeSSHServer(paramiko.ServerInterface):
     """
     Simulates an SSH server that accepts connections
@@ -113,10 +110,8 @@ class FakeSSHServer(paramiko.ServerInterface):
         except Exception as e:
             logger.error(f"Detection engine error: {e}")
 
-
-# ─────────────────────────────────────────
 # CLIENT HANDLER
-# ─────────────────────────────────────────
+
 def handle_client(client_socket, client_ip, host_key, db):
     """
     Handle a single SSH connection in its own thread.
@@ -161,10 +156,8 @@ def handle_client(client_socket, client_ip, host_key, db):
         except:
             pass
 
-
-# ─────────────────────────────────────────
 # MAIN HONEYPOT CLASS
-# ─────────────────────────────────────────
+
 class SSHHoneypot:
     """
     Main honeypot class.
@@ -230,10 +223,8 @@ class SSHHoneypot:
         print("[HONEYPOT] Honeypot stopped")
         logger.info("Honeypot stopped")
 
-
-# ─────────────────────────────────────────
 # RUN STANDALONE
-# ─────────────────────────────────────────
+
 if __name__ == '__main__':
     honeypot = SSHHoneypot()
     try:
